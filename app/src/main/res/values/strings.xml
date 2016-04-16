@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">哪好玩工具</string>
+    <string name="punishApp_name">随机惩罚工具</string>
+    <string name="guessApp_name">比划来猜</string>
+    <string name="app_about">关于哪好玩户外</string>
+    <string name="action_settings">设置</string>
+    <string name="hello_world">欢迎使用哪好玩工具v2.00!</string>
+    <string name="copyright">Copyright © nahaowan2015</string>
+    <string name="start_random_punish">接受正义的制裁吧</string>
+    <string name="start_guess">那就来吧</string>
+    <string name="what_punish">等待你的惩罚会是什么呢？</string>
+    <string name="about_nhw">一个年轻酷炫屌炸天的团队，挖掘各种户外好玩的地方，立志于和大家一起把各种美景，美食，美照刷爆朋友圈。</string>
+    <string name="slogan_nhw">不知哪好玩？就来“哪好玩”。</string>
+    <string name="qq_nhw">QQ群：237561375(<u>点击复制群号</u>)</string>
+    <string name="wechat_nhw">微信公众号：哪好玩户外(<u>点击复制名称</u>)</string>
+    <string name="selectDiffculty">选择难度</string>
+    <string name="selectType">选择词汇类型</string>
+    <string name="passWord">不知道，过</string>
+    <string name="again">再来一次</string>
+    <string name="rightAnswer">猜对啦</string>
+    <string name="chanceLeft">剩余过词机会:%1$s,当前得分/目标得分:%2$s/%3$s,剩余时间%4$s</string>
+    <string name="guess_intro">谁来比划谁来猜：一个人以动作或行为描述词汇，不能讲跟词汇包含字同音的字或词，另一个人来猜。每轮只可过词3次。时间统一为两分钟，初级需答对4词，中级5词，高级6词。</string>
+
+
+</resources>

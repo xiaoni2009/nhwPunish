@@ -1,0 +1,68 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFF"
+    android:orientation="vertical"
+    >
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="10sp"
+        android:textColor="#000"
+        android:text="@string/about_nhw" />
+    <ImageView 
+        android:layout_gravity="center_horizontal"
+        android:src="@drawable/nhw_logo"
+        android:layout_width="100sp"
+        android:layout_height="100sp"
+        android:paddingTop="10sp"
+        android:scaleType="centerCrop"
+        android:contentDescription="@string/slogan_nhw"
+        />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="10sp"
+        android:textSize="20sp"
+        android:textColor="#F00"
+        android:text="@string/slogan_nhw" />
+    <Button
+        android:id="@+id/qqButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingLeft="10sp"
+        android:paddingTop="10sp"
+        android:textSize="15sp"
+        android:text="@string/qq_nhw"
+        android:background="@android:color/transparent"/>
+    <Button
+        android:id="@+id/wechatButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="10sp"
+        android:paddingLeft="10sp"
+        android:paddingBottom="10sp"
+        android:textSize="15sp"
+        android:text="@string/wechat_nhw" 
+        android:background="@android:color/transparent"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textColor="#000"
+        android:textSize="15sp"
+        android:text="@string/hello_world" />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textSize="15sp"
+        android:paddingBottom="10sp"
+        android:textColor="#000"
+        android:text="@string/copyright" />
+    
+</LinearLayout>
+<!-- From: file:/E:/EclipeseWebWorkspace/nhwrandompunish/app/src/main/res/layout/activity_about.xml -->

@@ -1,0 +1,64 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_tomble"
+    android:orientation="vertical" >
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="128sp"
+        android:layout_height="188sp"
+        android:background="@android:color/transparent"
+        android:paddingTop="5sp"
+        android:text="" />
+
+    <ImageView
+        android:layout_width="128sp"
+        android:layout_height="188sp"
+        android:contentDescription="@string/slogan_nhw"
+        android:paddingTop="5sp"
+        android:src="@drawable/anim_stormback"
+        android:visibility="visible" />
+    <ImageView
+        android:id="@+id/cardPileView"
+        android:layout_width="128sp"
+        android:layout_height="188sp"
+        android:contentDescription="@string/slogan_nhw"
+        android:paddingTop="5sp"
+        android:src="@drawable/anim_stormback"
+        android:visibility="invisible" />
+
+    <ImageView
+        android:id="@+id/cardFaceImaView"
+        android:layout_width="320sp"
+        android:layout_height="527sp"
+        android:contentDescription="@string/slogan_nhw"
+        android:paddingLeft="90sp"
+        android:paddingTop="100sp"
+        android:src="@drawable/bg_cardface"
+        android:visibility="invisible" />
+
+    <ImageView
+        android:id="@+id/stormbackImaView"
+        android:layout_width="320sp"
+        android:layout_height="527sp"
+        android:contentDescription="@string/slogan_nhw"
+        android:paddingLeft="90sp"
+        android:paddingTop="100sp"
+        android:src="@drawable/anim_stormback"
+        android:visibility="invisible" />
+
+    <TextView
+        android:id="@+id/result"
+        android:layout_width="140sp"
+        android:layout_height="300sp"
+        android:layout_marginLeft="140sp"
+        android:layout_marginTop="155sp"
+        android:gravity="center_vertical"
+        android:paddingTop="5sp"
+        android:textColor="#666"
+        android:textSize="20sp" />
+
+</RelativeLayout>
