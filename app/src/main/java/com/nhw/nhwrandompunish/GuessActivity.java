@@ -175,7 +175,8 @@ public class GuessActivity extends Activity {
 			startGuessButton.setVisibility(View.INVISIBLE);
 
 			//根据难度从词源随机取词
-			wordToGuess = getRandomNoRepeateWord(wordToGuessSource,goalScore+1);
+			wordToGuess = getRandomNoRepeateWord(wordToGuessSource,goalScore+4);//因为可能要过3个词，所以需要多取几个词
+			getAGuessWord();//第一次取一个词
 			try {
 				flushChance();
 
@@ -255,12 +256,20 @@ public class GuessActivity extends Activity {
 
 				//重新选词
 				getAGuessWord();
+				if(passWordChanceLeft == 0){
+					hidePassButton();
+				}
 			}
 			else{
 				Toast toast= Toast.makeText(getApplicationContext(), "过词次数已用完", Toast.LENGTH_SHORT);
 				toast.show();
 			}
 		}
+	}
+
+	//当过词次数用尽，隐藏过词按钮
+	private void hidePassButton() {
+		passWordButton.setVisibility(View.INVISIBLE);
 	}
 
 	/**

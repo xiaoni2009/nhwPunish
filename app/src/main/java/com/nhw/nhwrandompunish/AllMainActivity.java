@@ -21,8 +21,6 @@ import java.util.Map;
 
 public class AllMainActivity extends Activity {
 
-	Button punishButton ;
-	Button guessButton;
 	private GridView gview;
 	private List<Map<String, Object>> data_list;
 	private SimpleAdapter sim_adapter;
@@ -46,14 +44,6 @@ public class AllMainActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_allmain);
-
-		punishButton = (Button) findViewById( R.id.punishButton );
-		toPunishButtonListener toPunishL = new toPunishButtonListener();
-		punishButton.setOnClickListener(toPunishL);
-
-		guessButton = (Button) findViewById( R.id.guessGameButton );
-		toGuessButtonListener toGuessL = new toGuessButtonListener();
-		guessButton.setOnClickListener(toGuessL);
 
 		gview = (GridView) findViewById(R.id.gview);
 		//新建List
@@ -86,40 +76,20 @@ public class AllMainActivity extends Activity {
 //			setTitle((String)item.get("text"));
 			switch (arg2){
 				case 0:{//跳转到随机惩罚
+					Intent intent = new Intent();
+					intent.setClass(AllMainActivity.this, PunishActivity.class);
+					startActivity(intent);
 					break;
 				}
 				case 1:{//跳转到比划来猜
+					Intent intent = new Intent();
+					intent.setClass(AllMainActivity.this, GuessActivity.class);
+					startActivity(intent);
 					break;
 				}
 			}
 		}
 
-	}
-
-	/**
-	 * 跳转到随机惩罚工具Activity
-	 */
-	class toPunishButtonListener implements OnClickListener{
-
-		@Override
-		public void onClick(View v){
-			Intent intent = new Intent();
-			intent.setClass(AllMainActivity.this, PunishActivity.class);
-			startActivity(intent);
-		}
-	}
-
-	/**
-	 * 跳转到比划来猜工具Activity
-	 */
-	class toGuessButtonListener implements OnClickListener{
-
-		@Override
-		public void onClick(View v){
-			Intent intent = new Intent();
-			intent.setClass(AllMainActivity.this, GuessActivity.class);
-			startActivity(intent);
-		}
 	}
 
 	//菜单相关-------------------------------------------------------------------------------

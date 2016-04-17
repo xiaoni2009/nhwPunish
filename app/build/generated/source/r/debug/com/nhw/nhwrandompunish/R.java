@@ -68,31 +68,29 @@ public final class R {
         public static final int stormback_2_33=0x7f02002b;
     }
     public static final class id {
-        public static final int action_settings=0x7f0a0018;
-        public static final int againButton=0x7f0a000f;
-        public static final int button=0x7f0a0011;
-        public static final int cardFaceImaView=0x7f0a0013;
-        public static final int cardPileView=0x7f0a0012;
-        public static final int chance=0x7f0a000b;
-        public static final int container=0x7f0a0010;
-        public static final int difficultyLever=0x7f0a0007;
-        public static final int guessGameButton=0x7f0a0003;
-        public static final int guessLayout=0x7f0a0005;
-        public static final int gview=0x7f0a0004;
-        public static final int image=0x7f0a0016;
-        public static final int intro=0x7f0a0006;
-        public static final int passWordButton=0x7f0a000d;
-        public static final int punishButton=0x7f0a0002;
+        public static final int action_settings=0x7f0a0016;
+        public static final int againButton=0x7f0a000d;
+        public static final int button=0x7f0a000f;
+        public static final int cardFaceImaView=0x7f0a0011;
+        public static final int cardPileView=0x7f0a0010;
+        public static final int chance=0x7f0a0009;
+        public static final int container=0x7f0a000e;
+        public static final int difficultyLever=0x7f0a0005;
+        public static final int guessLayout=0x7f0a0003;
+        public static final int gview=0x7f0a0002;
+        public static final int image=0x7f0a0014;
+        public static final int intro=0x7f0a0004;
+        public static final int passWordButton=0x7f0a000b;
         public static final int qqButton=0x7f0a0000;
-        public static final int result=0x7f0a0015;
-        public static final int rightButton=0x7f0a000e;
-        public static final int startGuessButton=0x7f0a0009;
-        public static final int stormbackImaView=0x7f0a0014;
-        public static final int text=0x7f0a0017;
-        public static final int timeBar=0x7f0a000a;
-        public static final int type=0x7f0a0008;
+        public static final int result=0x7f0a0013;
+        public static final int rightButton=0x7f0a000c;
+        public static final int startGuessButton=0x7f0a0007;
+        public static final int stormbackImaView=0x7f0a0012;
+        public static final int text=0x7f0a0015;
+        public static final int timeBar=0x7f0a0008;
+        public static final int type=0x7f0a0006;
         public static final int wechatButton=0x7f0a0001;
-        public static final int word=0x7f0a000c;
+        public static final int word=0x7f0a000a;
     }
     public static final class layout {
         public static final int activity_about=0x7f030000;

@@ -6,23 +6,6 @@
     android:background="#000"
     android:orientation="vertical" >
 
-    <Button
-        android:id="@+id/punishButton"
-        android:layout_width="128sp"
-        android:layout_height="122sp"
-        android:background="@android:color/transparent"
-        android:paddingTop="5sp"
-        android:text="@string/punishApp_name" />
-
-    <Button
-        android:id="@+id/guessGameButton"
-        android:layout_width="128sp"
-        android:layout_height="122sp"
-        android:background="@android:color/transparent"
-        android:paddingTop="5sp"
-        android:text="@string/guessApp_name"
-        />
-
     <GridView
         android:id="@+id/gview"
         android:layout_width="match_parent"
