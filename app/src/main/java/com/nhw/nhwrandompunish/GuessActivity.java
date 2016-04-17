@@ -41,6 +41,7 @@ public class GuessActivity extends Activity {
 	static int score = 0;//答对词数量
 	static int goalScore = 100;//取胜需要的答对数量，根据难度不同而不同
 	String[] wordToGuess;
+	String[] wordToGuessSource;
 	static int timeLeft= GlobalField.TIME_INITAL;
 	Thread timeCountThread;
 
@@ -132,19 +133,19 @@ public class GuessActivity extends Activity {
 		public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 			System.out.println("type####################position:"+position+",id:"+id);
 			switch (position){
-				case 0:{//成语,根据难度一次性随机取初级7，中级8，高级9个词
-					wordToGuess = GlobalField.GUESSWORD_IDIOM;
+				case 0:{//成语
+					wordToGuessSource = GlobalField.GUESSWORD_IDIOM;
 					break;
 				}
 				case 1:{//人名
-					wordToGuess = GlobalField.GUESSWORD_NAME;
+					wordToGuessSource = GlobalField.GUESSWORD_NAME;
 					break;
 				}
 				case 2:{//物品
-					wordToGuess = GlobalField.GUESSWORD_THING;
+					wordToGuessSource = GlobalField.GUESSWORD_THING;
 					break;
 				}
-				default:goalScore = GlobalField.GOALSCORE_LOW;
+				default:wordToGuessSource = GlobalField.GUESSWORD_IDIOM;
 			}
 		}
 
@@ -173,6 +174,8 @@ public class GuessActivity extends Activity {
 			type.setVisibility(View.INVISIBLE);
 			startGuessButton.setVisibility(View.INVISIBLE);
 
+			//根据难度从词源随机取词
+			wordToGuess = getRandomNoRepeateWord(wordToGuessSource,goalScore+1);
 			try {
 				flushChance();
 
@@ -211,6 +214,31 @@ public class GuessActivity extends Activity {
 		}
 	}
 
+	//因为不同难度的词汇最多是9个，所以我都取9个就行了
+	private String[] getRandomNoRepeateWord(String[] wordList,int length){
+		String[] result = new String[length];
+		String[] temp = new String[wordList.length];
+		//获取一个词源的副本，以便可以换词序
+		for(int i =0; i< wordList.length; i++) {
+			temp[i] = wordList[i];
+		}
+
+		int n = temp.length;
+		// 该for循环为产生不重复的中奖序列的核心代码
+		for(int i = 0; i < result.length; i++) {
+			int r = (int) (Math.random() * n);  // 随机产生一个从0——(n-1)的数字,Math.random()
+			// 随机产生一个[0, 1)范围的double型数值,
+			// 将该随机数字作为数组的下标，
+			result[i] = temp[r];				// 将该下标对应的值赋给result[i]
+			temp[r] = temp[n - 1];        // 将temp数组的temp[n-1]的值，赋给刚已赋
+			// 值过的temp[r]。相当于把已抽到的词放到最后，然后数组下标前移一位。
+			n--;   // 将n-1,从而下一次循环产生的随机的原数组下标的范围从0——（n-1）-1,
+			// 保证了上一步中，已经赋值给数组中其他数的temp[n-1]，不会在下次循环中给取
+			// 得，从而保证了产生的中奖数组result为不重复的。
+		}
+
+		return result;
+	}
 
 
 	/**
@@ -262,7 +290,7 @@ public class GuessActivity extends Activity {
 	 * 所以我们先取简单7歌词，中等8个词，高级9歌词，各含3个可过词
 	 */
 	private void getAGuessWord(){
-		word.setText( "");
+		word.setText("");
 
 		//取新的结果
 		randomText =wordToGuess[guessIndex];

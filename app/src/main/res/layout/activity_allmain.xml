@@ -1,8 +1,9 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFF"
+    android:background="#000"
     android:orientation="vertical" >
 
     <Button
@@ -20,7 +21,14 @@
         android:background="@android:color/transparent"
         android:paddingTop="5sp"
         android:text="@string/guessApp_name"
-        android:layout_below="@+id/punishButton"
         />
 
-</RelativeLayout>
+    <GridView
+        android:id="@+id/gview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:numColumns="auto_fit"
+        android:columnWidth="80dp"
+        android:stretchMode="columnWidth"
+        ></GridView>
+</LinearLayout>
