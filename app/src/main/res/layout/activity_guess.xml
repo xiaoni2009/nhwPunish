@@ -1,101 +1,153 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:flatui="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFF"
+    android:background="#e8e8e8"
     android:id="@+id/guessLayout"
     android:orientation="vertical" >
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="200sp"
+    <com.nhw.nhwrandompunish.views.FlatTextView
         android:id="@+id/intro"
-        android:text="@string/guess_intro"
-        />
-
-    <Spinner
         android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dip"
+        android:layout_marginRight="15dip"
+        android:layout_marginBottom="15dip"
+        android:layout_marginTop="100dip"
+        android:gravity="center_vertical"
+        android:text="@string/guess_intro"
+        android:textSize="16sp"
+        flatui:fl_textColor="main" />
+
+    <com.nhw.nhwrandompunish.views.FlatSpinner
+        android:layout_width="200sp"
         android:layout_height="40sp"
         android:id="@+id/difficultyLever"
         android:layout_below="@id/intro"
+        android:layout_margin="5dip"
+        android:gravity="center_vertical"
+        android:layout_centerHorizontal="true"
+        android:includeFontPadding="true"
+        android:layout_marginTop="10sp"
         />
 
-    <Spinner
-        android:layout_width="match_parent"
+    <com.nhw.nhwrandompunish.views.FlatSpinner
+        android:layout_width="200sp"
         android:layout_height="40sp"
         android:id="@+id/type"
         android:layout_below="@id/difficultyLever"
+        android:layout_margin="5dip"
+        android:gravity="center_vertical"
+        android:layout_centerHorizontal="true"
+        android:includeFontPadding="true"
+        android:layout_marginTop="10sp"
         />
 
-    <Button
+    <com.nhw.nhwrandompunish.views.FlatButton
         android:id="@+id/startGuessButton"
-        android:layout_width="128sp"
-        android:layout_height="122sp"
-        android:background="@android:color/darker_gray"
-        android:paddingTop="5sp"
+        android:layout_width="100dp"
+        android:layout_height="45dp"
+        android:layout_margin="30dp"
         android:text="@string/start_guess"
         android:layout_below="@id/type"
+        flatui:fl_textAppearance="light"
+        android:background="#F00"
+        android:layout_centerHorizontal="true"
         />
 
-    <ProgressBar
+    <com.nhw.nhwrandompunish.views.FlatProgressBar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dip"
+        android:layout_marginLeft="5dip"
+        android:layout_marginRight="5dip"
+        android:layout_marginBottom="5dip"
+        android:max="120"
         android:id="@+id/timeBar"
-        android:layout_width="match_parent"
-        android:layout_height="20sp"
-        style="?android:attr/progressBarStyleHorizontal"
         android:visibility="invisible"
+        style="?android:attr/progressBarStyleHorizontal"
         />
 
-    <TextView
-        android:id="@+id/chance"
+    <com.nhw.nhwrandompunish.views.FlatTextView
         android:layout_width="match_parent"
-        android:layout_height="200sp"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dip"
+        android:gravity="center"
+        android:textSize="14sp"
+        flatui:fl_textColor="main"
+        android:id="@+id/chance"
         android:text="@string/chanceLeft"
         android:layout_below="@id/timeBar"
         android:visibility="invisible"
         />
-    <TextView
-        android:id="@+id/word"
-        android:layout_width="match_parent"
-        android:layout_height="200sp"
-        android:text="@string/app_name"
+
+    <com.nhw.nhwrandompunish.views.FlatButton
+        android:layout_width="100dp"
+        android:layout_height="45dp"
+        android:layout_margin="30dp"
         android:layout_below="@id/chance"
-        android:visibility="invisible"
-        />
-
-    <Button
-        android:id="@+id/passWordButton"
-        android:layout_width="128sp"
-        android:layout_height="122sp"
-        android:background="@android:color/darker_gray"
-        android:paddingTop="5sp"
-        android:text="@string/passWord"
-        android:layout_below="@id/word"
-        android:visibility="invisible"
-        />
-
-    <Button
-        android:id="@+id/rightButton"
-        android:layout_width="128sp"
-        android:layout_height="122sp"
-        android:background="@android:color/darker_gray"
-        android:paddingTop="5sp"
-        android:paddingLeft="5sp"
-        android:text="@string/rightAnswer"
-        android:layout_toRightOf="@id/passWordButton"
-        android:layout_alignTop="@id/passWordButton"
-        android:visibility="invisible"
-        />
-
-    <Button
+        flatui:fl_textAppearance="light"
+        android:background="#F00"
+        android:layout_centerHorizontal="true"
+        android:gravity="center"
         android:id="@+id/againButton"
-        android:layout_width="100sp"
-        android:layout_height="50sp"
-        android:background="@android:color/darker_gray"
         android:paddingTop="5sp"
         android:layout_marginTop="50sp"
         android:text="@string/again"
-        android:layout_alignParentRight="true"
         android:visibility="invisible"
         />
+
+    <com.nhw.nhwrandompunish.views.FlatTextView
+        android:layout_width="match_parent"
+        android:layout_height="200dip"
+        android:layout_margin="5dip"
+        android:gravity="center"
+        android:textSize="60sp"
+        flatui:fl_textColor="main"
+        android:id="@+id/word"
+        android:text="@string/app_name"
+        android:layout_below="@id/againButton"
+        android:visibility="invisible"
+        android:layout_centerInParent="true"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/word"
+        android:orientation="horizontal"
+        android:paddingLeft="10dip"
+        android:paddingRight="10dip"
+        android:layout_margin="3dp"
+        android:gravity="center"
+        android:maxLines="1"
+        android:weightSum="5">
+
+        <com.nhw.nhwrandompunish.views.FlatButton
+            android:layout_width="50dp"
+            android:layout_height="45dp"
+            android:layout_margin="5dp"
+            flatui:fl_textAppearance="light"
+            android:background="#F00"
+            android:id="@+id/passWordButton"
+            android:text="@string/passWord"
+            android:visibility="invisible"
+            android:layout_weight="2"
+            />
+
+        <com.nhw.nhwrandompunish.views.FlatButton
+            android:layout_width="50dp"
+            android:layout_height="45dp"
+            android:layout_margin="5dp"
+            flatui:fl_textAppearance="light"
+            android:background="#F00"
+            android:id="@+id/rightButton"
+            android:text="@string/rightAnswer"
+            android:visibility="invisible"
+            android:layout_weight="2"
+            />
+    </LinearLayout>
+
+
 
 </RelativeLayout>

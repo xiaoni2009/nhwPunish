@@ -6,6 +6,7 @@ import android.content.res.Resources;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -19,22 +20,28 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.nhw.nhwrandompunish.ui.FlatUI;
 import com.nhw.nhwrandompunish.util.GlobalField;
+import com.nhw.nhwrandompunish.views.FlatButton;
+import com.nhw.nhwrandompunish.views.FlatProgressBar;
+import com.nhw.nhwrandompunish.views.FlatSeekBar;
+import com.nhw.nhwrandompunish.views.FlatSpinner;
 
 public class GuessActivity extends Activity {
 
-	Button startGuessButton ;
+	private final int APP_THEME = R.array.blood;
+	FlatButton startGuessButton ;
 	Button passWordButton ;
 	Button rightButton ;
 	Button againButton ;
 	TextView intro;
 	TextView word;
 	TextView chance;
-	Spinner difficultyLever;
+	FlatSpinner difficultyLever;
 	ArrayAdapter<String> difficultyLeverAd;
-	Spinner type;
+	FlatSpinner type;
 	ArrayAdapter<String> typeAd;
-	ProgressBar timeBar;
+	FlatProgressBar timeBar;
 	RelativeLayout r1;
 
 	static int passWordChanceLeft = GlobalField.GUESSPASS_CHANCELEFT;//可过词机会剩余数量
@@ -43,7 +50,7 @@ public class GuessActivity extends Activity {
 	String[] wordToGuess;
 	String[] wordToGuessSource;
 	static int timeLeft= GlobalField.TIME_INITAL;
-	Thread timeCountThread;
+	Thread timeCountThread = null;
 
 	int guessIndex = 0;
 	String randomText = "";
@@ -53,29 +60,36 @@ public class GuessActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_guess);
 
+		// converts the default values to dp to be compatible with different
+		// screen sizes
+		FlatUI.initDefaultValues(this);
+
+		// Default theme should be set before content view is added
+		FlatUI.setDefaultTheme(APP_THEME);
+
 		intro = (TextView) findViewById(R.id.intro);
 		word =  (TextView) findViewById(R.id.word);
 		chance =  (TextView) findViewById(R.id.chance);
 
-		difficultyLever = (Spinner)  findViewById(R.id.difficultyLever);
+		difficultyLever = (FlatSpinner)  findViewById(R.id.difficultyLever);
 		//将可选内容与ArrayAdapter连接起来
-		difficultyLeverAd = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item,GlobalField.DIFFICULT_LV);
+		difficultyLeverAd = new ArrayAdapter<String>(this,R.layout.mysimple_spinner_item,GlobalField.DIFFICULT_LV);
 		//设置下拉列表的风格
-		difficultyLeverAd.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+		difficultyLeverAd.setDropDownViewResource(R.layout.mysimple_spinner_dropdown_item);
 		//将adapter 添加到spinner中
 		difficultyLever.setAdapter(difficultyLeverAd);
 		//添加事件Spinner事件监听
 		difficultyLever.setOnItemSelectedListener(new difficultyLeverSpinnerSelectedListener());
 
-		type = (Spinner)  findViewById(R.id.type);
-		typeAd = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item,GlobalField.GUESS_TYPE);
-		typeAd.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+		type = (FlatSpinner)  findViewById(R.id.type);
+		typeAd = new ArrayAdapter<String>(this,R.layout.mysimple_spinner_item,GlobalField.GUESS_TYPE);
+		typeAd.setDropDownViewResource(R.layout.mysimple_spinner_dropdown_item);
 		type.setAdapter(typeAd);
 		type.setOnItemSelectedListener(new typeSpinnerSelectedListener());
 
-		timeBar = (ProgressBar)  findViewById(R.id.timeBar);
+		timeBar = (FlatProgressBar)  findViewById(R.id.timeBar);
 
-		startGuessButton = (Button) findViewById( R.id.startGuessButton );
+		startGuessButton = (FlatButton) findViewById( R.id.startGuessButton );
 		startGuessButtonListener startGuessBL = new startGuessButtonListener();
 		startGuessButton.setOnClickListener(startGuessBL);
 
@@ -155,6 +169,8 @@ public class GuessActivity extends Activity {
 		}
 	}
 
+
+
 	/**
 	 * 开始比划来猜按钮监听器
 	 */
@@ -174,30 +190,40 @@ public class GuessActivity extends Activity {
 			type.setVisibility(View.INVISIBLE);
 			startGuessButton.setVisibility(View.INVISIBLE);
 
+			passWordChanceLeft = GlobalField.GUESSPASS_CHANCELEFT;//可过词机会剩余数量
+			score = 0;//答对词数量
+			timeLeft = GlobalField.TIME_INITAL;
+			guessIndex = 0;
+
 			//根据难度从词源随机取词
 			wordToGuess = getRandomNoRepeateWord(wordToGuessSource,goalScore+4);//因为可能要过3个词，所以需要多取几个词
 			getAGuessWord();//第一次取一个词
 			try {
 				flushChance();
-
-				//启动新线程开始计时，在新的线程里面启用倒计时任务，会占用这个线程的大部分时间
+				if(timeCountThread != null) {
+//					timeCountThread.stop();
+					timeCountThread.interrupt();
+				}
+				//只有在线程中断或者死亡的情况下，才启动线程。一个线程运行一个runnable实例。
+//				if(timeCountThread.isInterrupted() || !timeCountThread.isAlive() ) {
 				timeCountThread = new Thread(
 						new Runnable() {
 							@Override
 							public void run() {
 								Message message = new Message();
 								try {
-									while(timeLeft >= 1){
+									while (timeLeft >= 1) {
 										//不加这句会报：This message is already in use错误
-										message=GuessActivity.this.flushChanceHandler.obtainMessage();
+										message = GuessActivity.this.flushChanceHandler.obtainMessage();
 										Thread.currentThread().sleep(1000);//毫秒
 										timeLeft--;
 										message.what = GlobalField.FLUSH_CHANCE_MSG;
 										// 发送消息
 										GuessActivity.this.flushChanceHandler.sendMessage(message);
 									}
-									if(timeLeft <= 0){
-										message=GuessActivity.this.flushChanceHandler.obtainMessage();
+									if (timeLeft <= 0) {
+										timeLeft = 0;
+										message = GuessActivity.this.flushChanceHandler.obtainMessage();
 										message.what = GlobalField.FAILED_MSG;
 										// 发送消息
 										GuessActivity.this.flushChanceHandler.sendMessage(message);
@@ -208,7 +234,9 @@ public class GuessActivity extends Activity {
 							}
 						}
 				);
+
 				timeCountThread.start();
+//				}
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -311,11 +339,16 @@ public class GuessActivity extends Activity {
 
 	//提示成功界面
 	void successShow(){
-		word.setText( "恭喜闯关成功！");
+		word.setText("恭喜闯关成功！");
 		passWordButton.setVisibility(View.INVISIBLE);
 		rightButton.setVisibility(View.INVISIBLE);
 		//停止倒计时
-		timeCountThread.interrupt();
+		try {
+			timeCountThread.interrupt();
+//			timeCountThread.stop();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	//提示失败界面
@@ -331,6 +364,8 @@ public class GuessActivity extends Activity {
 		Resources res = getResources();
 		String text = String.format(res.getString(R.string.chanceLeft), passWordChanceLeft, score,goalScore,timeLeft);
 		chance.setText(text);
+
+		timeBar.setProgress(timeLeft);
 	}
 
 	//在handler中更新UI的TextView，这个可以跨线程更新
@@ -389,6 +424,33 @@ public class GuessActivity extends Activity {
 		guessIndex = 0;
 		flushChance();
 		word.setText("");
+
+		try {
+			if(timeCountThread != null) {
+//				timeCountThread.stop();
+				timeCountThread.interrupt();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	//返回键关闭倒计时线程
+	@Override
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+
+		if ( keyCode == KeyEvent.KEYCODE_BACK
+				&& event.getRepeatCount() == 0) {
+			try {
+				if(timeCountThread != null) {
+					timeCountThread.interrupt();
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+//			return true;
+		}
+		return super.onKeyDown(keyCode, event);
 	}
 	//菜单相关-------------------------------------------------------------------------------
 	@Override
@@ -411,6 +473,16 @@ public class GuessActivity extends Activity {
 		return super.onOptionsItemSelected(item);
 	}
 
-
+	@Override
+	protected void onResume(){
+		super.onResume();
+//		try {
+//			if(timeCountThread != null) {
+//				timeCountThread.interrupt();
+//			}
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+	}
 
 }
