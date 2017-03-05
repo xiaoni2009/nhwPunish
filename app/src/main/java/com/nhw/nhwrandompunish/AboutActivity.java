@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.Toast;
 
 public class AboutActivity extends Activity{
+
 	Button copyQQBt ;
 	Button copyWechatBt;
 	Toast toast;
